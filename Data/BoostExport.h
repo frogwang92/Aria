@@ -1,6 +1,7 @@
 #pragma once
-#include <boost\python.hpp>
-#include <boost\shared_ptr.hpp>
+#include <boost/python.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/date_time.hpp>
 #include <datetime.h>
 #include "Symbol.h"
 #include "OHLCV.h"
@@ -67,8 +68,9 @@ struct ptime_to_python
 
 BOOST_PYTHON_MODULE(DataFeed)
 {
+   PyDateTime_IMPORT;
    ptime_from_python_datetime_str();
-   to_python_converter<boost::posix_time::ptime, ptime_to_python>();
+   to_python_converter<const boost::posix_time::ptime, ptime_to_python>();
    register_ptr_to_python< boost::shared_ptr<DataSlice> >();
    register_ptr_to_python< boost::shared_ptr<OHLCVReader_Py> >();
    register_ptr_to_python< boost::shared_ptr<OHLCV> >();
@@ -89,8 +91,8 @@ BOOST_PYTHON_MODULE(DataFeed)
       .def("high", &OHLC::high)
       .def("low", &OHLC::low)
       .def("adj_close", &OHLC::adj_close)
-      .def("start_time", &OHLC::start_time, return_value_policy<reference_existing_object>() )
-      .def("end_time", &OHLC::end_time, return_value_policy<reference_existing_object>() )
+      .def("start_time", &OHLC::start_time, return_value_policy<return_by_value>() )
+      .def("end_time", &OHLC::end_time, return_value_policy<return_by_value>() )
       ;
    class_<OHLCV, bases<OHLC> >("OHLCV")
       .def("volume", &OHLCV::volume)
@@ -101,10 +103,11 @@ BOOST_PYTHON_MODULE(DataFeed)
    class_<DataSlice>("DataSlice")
       .def("get_resolution", &DataSlice::get_resolution)
       .def("get_data", &DataSlice::get_data)
-      .def("get_start_time", &DataSlice::get_start_time, return_value_policy<reference_existing_object>() )
-      .def("get_end_time", &DataSlice::get_end_time, return_value_policy<reference_existing_object>() )
+      .def("get_start_time", &DataSlice::get_start_time, return_value_policy<return_by_value>() )
+      .def("get_end_time", &DataSlice::get_end_time, return_value_policy<return_by_value>() )
       ;
    class_<OHLCVReader_Py, boost::noncopyable>("OHLCVReader_Py", no_init)
       .def("push_data", &OHLCVReader_Py::push_data)
       ;
+   
 }

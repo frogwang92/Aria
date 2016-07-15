@@ -3,6 +3,7 @@
 #include "../Common/BlockingQueue.h"
 #include "../Data/Symbol.h"
 #include <boost/thread/mutex.hpp>
+#include <boost/date_time.hpp>
 #include "../Common/mode.h"
 
 class Portfolio;
@@ -18,8 +19,8 @@ public:
    ~PortfolioManager(void);
 
 public:
-   void buy(Symbol symbol, double price, double percentage);
-   void sell(Symbol symbol, double price, double percentage);
+   void buy(const boost::posix_time::ptime& time_point, Symbol symbol, double price, double percentage);
+   void sell(const boost::posix_time::ptime& time_point, Symbol symbol, double price, double percentage);
    void process_job_node_sync(const shared_ptr<TradeJobNode>& job_node);
    void push_job_node(const shared_ptr<TradeJobNode>& job_node) { m_jobqueue.push(job_node); }
    void run();

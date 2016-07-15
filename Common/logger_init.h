@@ -61,4 +61,10 @@ void init_log()
 
    logging::add_common_attributes();
    logging::core::get()->add_global_attribute("ThreadID", attrs::current_thread_id());
+
+   // write headers
+   // yahoo financial api compatiable format
+   datalog << "Date,Open,High,Low,Close,Adj Close,Volume";
+   portfoliolog << "Date,Value";
+   tradelog<< "Date,Type,Symbol,Shares,Price,Cash";
 }

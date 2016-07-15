@@ -43,5 +43,12 @@ void AlgorithmManager::do_cycle(const shared_ptr<DataSlice>& p_data)
 {
    m_algorithm->on_data(p_data);
 
-   portfoliolog << p_data->get_start_time() << "," << m_portfolio_manager->query_net_value(p_data);
+   if(p_data->get_resolution() == Day)
+   {
+      portfoliolog << to_iso_extended_string(p_data->get_start_time().date()) << "," << m_portfolio_manager->query_net_value(p_data);
+   }
+   else
+   {
+      portfoliolog << p_data->get_end_time() << "," << m_portfolio_manager->query_net_value(p_data);
+   }
 }

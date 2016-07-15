@@ -21,12 +21,12 @@ void Algorithm::register_call_back(const shared_ptr<PortfolioManager>& portfolio
    m_portfolio_manager = weak_ptr<PortfolioManager>(portfolio_manager);
 }
 
-void Algorithm::buy(Symbol symbol, double price, double percentage)
+void Algorithm::buy(const boost::posix_time::ptime& time_point, Symbol symbol, double price, double percentage)
 {
-   (m_portfolio_manager.lock())->buy(symbol, price, percentage);
+   (m_portfolio_manager.lock())->buy(time_point, symbol, price, percentage);
 }
 
-void Algorithm::sell(Symbol symbol, double price, double percentage)
+void Algorithm::sell(const boost::posix_time::ptime& time_point, Symbol symbol, double price, double percentage)
 {
-   (m_portfolio_manager.lock())->sell(symbol, price, percentage);
+   (m_portfolio_manager.lock())->sell(time_point, symbol, price, percentage);
 }

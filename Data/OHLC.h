@@ -42,13 +42,25 @@ using std::ostream;
 
 inline ostream & operator<<(ostream &stream, const OHLC & right)
 {
-   stream << right.start_time() << "," 
-      << right.end_time() << "," 
-      << right.open() << "," 
-      << right.close() << "," 
-      << right.high() << "," 
-      << right.low() << "," 
-      << right.adj_close();
-
+   if (right.end_time() - right.start_time() == boost::posix_time::time_duration(0, 0, Day))
+   {
+      stream << to_iso_extended_string(right.start_time().date()) << ","
+         << right.open() << ","
+         << right.high() << ","
+         << right.low() << ","
+         << right.close() << ","
+         << right.adj_close();
+   }
+   else
+   {
+      stream << right.start_time() << ","
+         << right.end_time() << ","
+         << right.open() << ","
+         << right.high() << ","
+         << right.low() << ","
+         << right.close() << ","
+         << right.adj_close();
+   }
+   
    return stream;
 }

@@ -12,17 +12,17 @@ BacktestBrokerage::~BacktestBrokerage(void)
 {
 }
 
-bool BacktestBrokerage::request_buy(Symbol symbol, double shares, double price)
+bool BacktestBrokerage::request_buy(const boost::posix_time::ptime& time_point, Symbol symbol, double shares, double price)
 {
-   shared_ptr<TradeJobNode> p_node(new TradeJobNode(TradeJobNode::BuyResult, symbol, shares, price, 0));
+   shared_ptr<TradeJobNode> p_node(new TradeJobNode(time_point, TradeJobNode::BuyResult, symbol, shares, price, 0));
    
    m_portfolio_manager.lock()->process_job_node_sync(p_node);
    return true;
 }
 
-bool BacktestBrokerage::request_sell(Symbol symbol, double shares, double price)
+bool BacktestBrokerage::request_sell(const boost::posix_time::ptime& time_point, Symbol symbol, double shares, double price)
 {
-   shared_ptr<TradeJobNode> p_node(new TradeJobNode(TradeJobNode::SellResult, symbol, shares, price, 0));
+   shared_ptr<TradeJobNode> p_node(new TradeJobNode(time_point, TradeJobNode::SellResult, symbol, shares, price, 0));
    m_portfolio_manager.lock()->process_job_node_sync(p_node);
    return true;
 }

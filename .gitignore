@@ -246,3 +246,5 @@ ModelManifest.xml
 
 # amstockchart
 amstockchart/
+/.vscode
+*.pyc

@@ -25,13 +25,13 @@ void PortfolioManager::run()
    boost::thread t(boost::bind(&PortfolioManager::do_job, this));
 }
 
-void PortfolioManager::buy(Symbol symbol, double price, double percentage)
+void PortfolioManager::buy(const boost::posix_time::ptime& time_point, Symbol symbol, double price, double percentage)
 {
    double cash = m_portfolio.lock()->get_cash_total();
    double cash_available = m_portfolio.lock()->get_cash_available();
    double cash_request = cash * percentage;
    int share = m_brokerage.lock()->normalize_buy_shares(cash_request, price);
-   boost::shared_ptr<TradeJobNode> p_node(new TradeJobNode(TradeJobNode::Buy, symbol, share, price, 0));
+   boost::shared_ptr<TradeJobNode> p_node(new TradeJobNode(time_point, TradeJobNode::Buy, symbol, share, price, 0));
    if( m_mode == Realtime)
    {
       push_job_node(p_node);
@@ -42,11 +42,11 @@ void PortfolioManager::buy(Symbol symbol, double price, double percentage)
    }
 }
 
-void PortfolioManager::sell(Symbol symbol, double price, double percentage)
+void PortfolioManager::sell(const boost::posix_time::ptime& time_point, Symbol symbol, double price, double percentage)
 {
    double shares = m_portfolio.lock()->get_hold_share_available(symbol);
    int request_shares = m_brokerage.lock()->normalize_sell_shares(shares, percentage);
-   boost::shared_ptr<TradeJobNode> p_node(new TradeJobNode(TradeJobNode::Sell, symbol, request_shares, price, 0));
+   boost::shared_ptr<TradeJobNode> p_node(new TradeJobNode(time_point, TradeJobNode::Sell, symbol, request_shares, price, 0));
    if( m_mode == Realtime)
    {
       push_job_node(p_node);
@@ -66,7 +66,7 @@ void PortfolioManager::process_job_node_sync(const shared_ptr<TradeJobNode>& p_n
 {
    if(p_node)
    {
-      tradelog << *p_node ;
+      tradelog << to_iso_extended_string(p_node->get_trade_time().date()) << "," << *p_node ;
       switch(p_node->get_type())
       {
       case TradeJobNode::Buy:
@@ -75,7 +75,7 @@ void PortfolioManager::process_job_node_sync(const shared_ptr<TradeJobNode>& p_n
                                           p_node->get_symbol(),
                                           0,
                                           0);
-         m_brokerage.lock()->request_buy(p_node->get_symbol(), p_node->get_shares(), p_node->get_price());
+         m_brokerage.lock()->request_buy(p_node->get_trade_time(), p_node->get_symbol(), p_node->get_shares(), p_node->get_price());
          break;
       case TradeJobNode::Sell:
          m_portfolio.lock()->update_portfolio(0, 
@@ -83,7 +83,7 @@ void PortfolioManager::process_job_node_sync(const shared_ptr<TradeJobNode>& p_n
                                           p_node->get_symbol(),
                                           p_node->get_shares() * (-1),
                                           p_node->get_shares());
-         m_brokerage.lock()->request_sell(p_node->get_symbol(), p_node->get_shares(), p_node->get_price());
+         m_brokerage.lock()->request_sell(p_node->get_trade_time(), p_node->get_symbol(), p_node->get_shares(), p_node->get_price());
          break;
       case TradeJobNode::BuyResult:
          m_portfolio.lock()->update_portfolio(0, 

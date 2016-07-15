@@ -19,7 +19,7 @@ void Algorithm_Buyandhold::on_data(const shared_ptr<DataSlice>& slice)
 {
    if( m_start_time >= slice->get_start_time() && !m_bought)
    {
-      buy(m_symbol, slice->get_data(m_symbol)->adj_close(), 1.0);
+      buy(slice->get_start_time(), m_symbol, slice->get_data(m_symbol)->adj_close(), 1.0);
       m_bought = true;
    }
 }
