@@ -4,6 +4,7 @@
 
 #include <boost/noncopyable.hpp>
 #include <boost/date_time.hpp>
+#include <boost/thread.hpp>
 #include "Resolution.h"
 #include <vector>
 #include "IDataFeed.h"
@@ -32,6 +33,7 @@ public:
    
 public:
    bool operator>> (shared_ptr<DataSlice>& p_data);
+   shared_ptr<DataSlice> head();
 
 protected:
    virtual shared_ptr<DataSlice> get();
@@ -43,11 +45,15 @@ protected:
    std::vector<shared_ptr<OHLCVReader> > m_readers;
    
 private:
+   void run();
+
+private:
    boost::posix_time::ptime m_start_time;
    boost::posix_time::ptime m_end_time;
    boost::posix_time::ptime m_curr_time;
    Resolution m_res;
    std::vector<shared_ptr<Indicator> > m_indicators;
    BlockingQueue<shared_ptr<DataSlice> > m_queue;
+   shared_ptr<boost::thread> m_pthread;
 };
 

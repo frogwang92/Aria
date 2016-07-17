@@ -52,12 +52,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/D BOOST_ALL_DYN_LINK %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>..\Common\;d:\Lib\boost_1_60_0;c:\Python27\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Common\;d:\Lib\boost_1_60_0;$(PYTHONPATH)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>c:\Python27\libs;d:\Lib\boost_1_60_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(PYTHONPATH)\libs;d:\Lib\boost_1_60_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>del "$(OutDir)*.py"
@@ -85,6 +85,7 @@ copy *.py "$(OutDir)CSV_OHLCV.py"</Command>
     <None Include="CSV_OHLCV.py" />
     <None Include="da.csv" />
     <None Include="table.csv" />
+    <None Include="TuShare_OHLCV_day.py" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />

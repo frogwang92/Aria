@@ -31,8 +31,7 @@ void OHLCVReader_Py::read_impl()
       initDataFeed();
       object module(handle<>(borrowed(PyImport_AddModule("__main__"))));
       object dictionary = module.attr("__dict__");
-      
-      PyRun_SimpleString("execfile('CSV_OHLCV.py')");
+      PyRun_SimpleString("execfile('TuShare_OHLCV_day.py')");
       object run(module.attr("run"));
       run(ptr(this));
    }
@@ -42,11 +41,11 @@ void OHLCVReader_Py::read_impl()
    }
 }
 
-void OHLCVReader_Py::push_data(int open, int close, int high, int low, int adj_close, const boost::posix_time::ptime& starttime, Resolution res, int vol)
+void OHLCVReader_Py::push_data(int open, int high, int low, int close, int adj_close, const boost::posix_time::ptime& starttime, Resolution res, int vol)
 {
    Py_BEGIN_ALLOW_THREADS
 
-   shared_ptr<OHLCV> p_ohlcv(new OHLCV(open, close, high, low, adj_close, starttime, res, vol));
+   shared_ptr<OHLCV> p_ohlcv(new OHLCV(open, high, low, close, adj_close, starttime, res, vol));
    datalog << *p_ohlcv;
    m_queue.push(p_ohlcv);
 

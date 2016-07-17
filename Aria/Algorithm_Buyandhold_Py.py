@@ -11,5 +11,5 @@ def on_data(instance, data_slice):
    global b_bought
    if not b_bought :
       #print data_slice.get_start_time()
-      instance.buy(str(data_slice.get_start_time()), sym, data_slice.get_data(sym).adj_close(), 1.0)
+      instance.buy(str(data_slice.get_start_time()), sym, data_slice.get_data(sym).close(), 1.0)
       b_bought = True

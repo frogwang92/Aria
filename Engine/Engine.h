@@ -14,8 +14,14 @@
 #include "global.h"
 #include "Singleton.h"
 #include <boost/python.hpp>
+#include <boost/date_time.hpp>
+#include "mode.h"
+#include "../Data/Resolution.h"
+
+class IMasterTimeHandler;
 class IDataFeed;
 class IAlgorithmManager;
+class Scheduler;
 
 // This class is exported from the Engine.dll
 class ENGINE_API Engine 
@@ -25,13 +31,14 @@ friend class Singleton<Engine>;
 public:
    void run();
 
-   void init();
+   void init_back_test(boost::posix_time::ptime start_time, Resolution res);
 
    ~Engine(void);
 
 private:
 	Engine(void);
-   
+   void init();
+
 private:
    static boost::shared_ptr<Engine> m_instance;
 
@@ -39,5 +46,12 @@ private:
    PyThreadState* m_thread_state;
    boost::shared_ptr<IDataFeed> m_feed;
    boost::shared_ptr<IAlgorithmManager> m_algorithm_manager;
+   boost::shared_ptr<IMasterTimeHandler> m_pTimeHandler;
+   boost::shared_ptr<Scheduler> m_pScheduler;
+
+   Mode m_mode;
+   Resolution m_res;
+
+   bool do_cycle();
 };
 

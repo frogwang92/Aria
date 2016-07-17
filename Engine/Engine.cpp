@@ -12,6 +12,10 @@
 #include "../Algorithm/IAlgorithmManager.h"
 #include "../Data/IDataFeed.h"
 #include "../Common/ScopedGILRelease.h"
+#include "../Data/DataSlice.h"
+#include "BacktestTimeHandler.h"
+#include "TimeService.h"
+#include "Scheduler.h"
 
 using namespace boost;
 
@@ -19,11 +23,22 @@ using namespace boost;
 // see Engine.h for the class definition
 Engine::Engine()
    :m_feed(),
-   m_algorithm_manager()
+   m_algorithm_manager(),
+   m_mode(Backtest),
+   m_res(Day)
 {
    Py_Initialize();
    PyEval_InitThreads();
    m_thread_state = PyEval_SaveThread();
+}
+
+void Engine::init_back_test(boost::posix_time::ptime start_time, Resolution res)
+{
+   m_pTimeHandler = shared_ptr<IMasterTimeHandler>(new BacktestTimeHandler(start_time, Day));
+   Singleton<TimeService>::instance().register_handler(m_pTimeHandler);
+   std::function<bool()> task = std::bind(&Engine::do_cycle, this);
+   m_pScheduler = shared_ptr<Scheduler>(new Scheduler(start_time, duration(res), task));
+   init();
 }
 
 Engine::~Engine()
@@ -46,16 +61,23 @@ void Engine::run()
 
    m_algorithm_manager->run();
 
-   while( true )
+   m_pScheduler->run();
+}
+
+bool Engine::do_cycle()
+{
+   if (m_feed->head()->get_start_time() <= TimeService::now())
    {
       boost::shared_ptr<DataSlice> p_data;
-      if( (*m_feed) >> p_data )
+      if ((*m_feed) >> p_data)
       {
          m_algorithm_manager->do_cycle(p_data);
       }
       else
       {
-         break;
+         return false;
       }
    }
+   dynamic_pointer_cast<BacktestTimeHandler>(m_pTimeHandler)->step();
+   return true;
 }

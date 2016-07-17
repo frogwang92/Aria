@@ -1,5 +1,5 @@
 #pragma once
-
+#include <boost/date_time.hpp>
 enum Resolution
 {
    Second = 1,
@@ -11,3 +11,8 @@ enum Resolution
    TwoHours = 7200,
    Day = 86400
 };
+
+inline boost::posix_time::time_duration duration(Resolution res)
+{
+   return boost::posix_time::time_duration(0, 0, res);
+}

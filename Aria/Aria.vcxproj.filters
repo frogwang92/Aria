@@ -33,6 +33,9 @@
     <None Include="Algorithm_Buyandhold_Py.py">
       <Filter>Scripts</Filter>
     </None>
+    <None Include="TuShare_OHLCV_day.py">
+      <Filter>Scripts</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

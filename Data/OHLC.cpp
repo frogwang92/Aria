@@ -5,30 +5,30 @@ using namespace boost::posix_time;
 
 OHLC::OHLC(void)
    :m_open(0),
+	m_high(0),
+	m_low(0),
    m_close(0),
-   m_high(0),
-   m_low(0),
    m_adjclose(0),
    m_starttime(not_a_date_time),
    m_endtime(not_a_date_time)
 {
 }
 
-OHLC::OHLC(int open, int close, int high, int low, int adj_close)
+OHLC::OHLC(int open, int high, int low, int close, int adj_close)
    :m_open(open),
-   m_close(close),
    m_high(high),
    m_low(low),
+   m_close(close),
    m_adjclose(adj_close),
    m_starttime(not_a_date_time),
    m_endtime(not_a_date_time)
 {}
 
-OHLC::OHLC(int open, int close, int high, int low, int adj_close, const ptime& starttime, Resolution res)
+OHLC::OHLC(int open, int high, int low, int close, int adj_close, const ptime& starttime, Resolution res)
    :m_open(open),
-   m_close(close),
    m_high(high),
    m_low(low),
+   m_close(close),
    m_adjclose(adj_close),
    m_starttime(starttime)
 {

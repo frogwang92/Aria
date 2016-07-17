@@ -39,7 +39,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>c:\Python27\include;d:\Lib\boost_1_60_0;$(IncludePath)</IncludePath>
+    <IncludePath>$(PYTHONPATH)\include;d:\Lib\boost_1_60_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -66,11 +66,13 @@
   <ItemGroup>
     <ClInclude Include="BlockingQueue.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="IMasterTimeHandler.h" />
     <ClInclude Include="logger.h" />
     <ClInclude Include="logger_init.h" />
     <ClInclude Include="mode.h" />
     <ClInclude Include="ScopedGILRelease.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="TimeService.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

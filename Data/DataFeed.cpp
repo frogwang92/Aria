@@ -28,6 +28,8 @@ DataFeed::DataFeed(const boost::posix_time::ptime& start_time, const boost::posi
 
 DataFeed::~DataFeed(void)
 {
+   if (m_pthread)
+      m_pthread->join();
 }
 
 bool DataFeed::operator>> (shared_ptr<DataSlice>& p_data)
@@ -42,9 +44,9 @@ bool DataFeed::operator>> (shared_ptr<DataSlice>& p_data)
    return true;
 }
 
-shared_ptr<DataSlice> DataFeed::get()
+void DataFeed::run()
 {
-   if( !is_active() )
+   if (!is_active())
    {
       BOOST_FOREACH(shared_ptr<OHLCVReader> reader, m_readers)
       {
@@ -52,8 +54,19 @@ shared_ptr<DataSlice> DataFeed::get()
       }
       m_active = true;
       std::cout << "data feed start pumping, end time is " << get_endtime() << std::endl;
-      boost::thread pumpthread(boost::bind(&DataFeed::pumping_data, this));
+      m_pthread = shared_ptr<boost::thread>(new boost::thread(boost::bind(&DataFeed::pumping_data, this)));
    }
+}
+
+shared_ptr<DataSlice> DataFeed::head()
+{
+   run();
+   return m_queue.head();
+}
+
+shared_ptr<DataSlice> DataFeed::get()
+{
+   run();
    return m_queue.pop();
 }
 

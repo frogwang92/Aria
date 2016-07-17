@@ -15,24 +15,26 @@ class DATA_API OHLC
 public:
    OHLC(void);
    //in cent
-   OHLC(int open, int close, int high, int low, int adj_close);
-   OHLC(int open, int close, int high, int low, int adj_close, const boost::posix_time::ptime& starttime, Resolution res);
+   OHLC(int open, int high, int low, int close, int adj_close);
+   OHLC(int open, int high, int low, int close, int adj_close, const boost::posix_time::ptime& starttime, Resolution res);
    virtual ~OHLC(void);
 
 public:
    virtual int open() const { return m_open; }
-   virtual int close() const { return m_close; }
    virtual int high() const { return m_high; }
    virtual int low() const { return m_low; }
+   virtual int close() const { return m_close; }
+
    virtual int adj_close() const { return m_adjclose; }
    const boost::posix_time::ptime& start_time() const { return m_starttime; }
    const boost::posix_time::ptime& end_time() const { return m_endtime; }
 
 private:
    int m_open;
-   int m_close;
    int m_high;
    int m_low;
+   int m_close;
+
    int m_adjclose;
    boost::posix_time::ptime m_starttime;
    boost::posix_time::ptime m_endtime;

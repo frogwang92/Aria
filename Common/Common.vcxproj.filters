@@ -32,5 +32,11 @@
     <ClInclude Include="ScopedGILRelease.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TimeService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IMasterTimeHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

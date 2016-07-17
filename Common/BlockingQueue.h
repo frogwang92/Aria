@@ -31,6 +31,16 @@ public:
       return true;
    }
 
+   T& head()
+   {
+      boost::mutex::scoped_lock lock(m_mutex);
+      while (m_container.empty())
+      {
+         m_signal.wait(lock);  // yield the mutex and wait
+      }
+      return m_container.back();
+   }
+
    T pop()
    {
       boost::mutex::scoped_lock lock(m_mutex);
