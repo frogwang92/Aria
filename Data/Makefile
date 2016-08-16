@@ -1,26 +1,41 @@
-CURR:=$(ROOT)/$(DATA)/
-DEBUG_DIR:=$(CURR)$(TEMPOUTPUTDIR)/
+MODULE:=$(DATA)
+
+CURR:=$(ROOT)/$(MODULE)
+GEN_DIR:=$(CURR)/$(GEN)
+
 CPP_SOURCE:=$(wildcard *.cpp)
-OBJ_FILES:=$(patsubst %.cpp, $(DEBUG_DIR)%.o, $(CPP_SOURCE))
-CPP_SOURCE_FULL:=$(patsubst %.cpp, $(CURR)%.cpp, $(CPP_SOURCE))
+OBJ_FILES:=$(patsubst %.cpp, $(GEN_DIR)/%.o, $(CPP_SOURCE))
+CPP_SOURCE_FULL:=$(patsubst %.cpp, $(CURR)/%.cpp, $(CPP_SOURCE))
 DEPS=$(patsubst %.o, %.d, $(OBJ_FILES))
-LIB_NAME=$(BIN_DIR)$(DATA).dll
+LIB_NAME=$(BIN_DIR)/$(MODULE).dll
+
+LDFLAGS+=$(LDFLAGS_PYTHON27)
+LDFLAGS+=$(LDFLAGS_BOOST_SYSTEM)
+LDFLAGS+=$(LDFLAGS_BOOST_FILESYSTEM)
+LDFLAGS+=$(LDFLAGS_BOOST_LOG)
+LDFLAGS+=$(LDFLAGS_BOOST_THREAD)
+LDFLAGS+=$(LDFLAGS_BOOST_PYTHON)
+LDFLAGS+=$(LDFLAGS_BOOST_DATETIME)
+
+INCL+=-I$(COMMON_DIR)
+INCL+=-I$(PYTHON_INCLUDE_DIR)
+
+DEF_BUILD_DLL+=-DDATA_EXPORTS
 
 all:$(LIB_NAME)
 
 $(LIB_NAME):$(OBJ_FILES)
-	$(LD) -shared -o $@ $^ $(LDFLAGS) -lboost_system -lboost_filesystem -lboost_log -lboost_thread -lboost_python -lpython2.7 -lboost_date_time \
-	-Wl,--out-implib=${LIB_NAME}.a
+	$(LD) $(LINK_SHARED) -o $@ $^ $(LDFLAGS) -Wl,--out-implib=$(LIB_NAME).a
 
 -include $(DEPS)
 
-$(DEPS): $(DEBUG_DIR)%.d: $(CURR)%.cpp
-	$(CC) -c -I$(COMMON_DIR) -I$(PYTHON_INCLUDE_DIR) $< -MM > $@.$$
-	@sed -r 's,($*)\.o[:]*,$(DEBUG_DIR)\1.o $@:,g' < $@.$$ > $@
+$(DEPS): $(GEN_DIR)/%.d: $(CURR)/%.cpp
+	$(CC) -c $(INCL) $< -MM > $@.$$
+	@sed -r 's,($*)\.o[:]*,$(GEN_DIR)/\1.o $@:,g' < $@.$$ > $@
 	@rm -rf $@.$$
 
-$(OBJ_FILES): $(DEBUG_DIR)%.o: $(CURR)%.cpp
-	$(CC) -c $(CPP_FLAGS) -I$(COMMON_DIR) -I$(PYTHON_INCLUDE_DIR) $< -D$(BUILDING_DLL) -DDATA_EXPORTS -D$(BOOST_LINK_OPT) -o $@
+$(OBJ_FILES): $(GEN_DIR)/%.o: $(CURR)/%.cpp
+	$(CC) -c $(CPP_FLAGS) $(INCL) $< $(DEF_BUILD_DLL) -o $@
 
 .PHONY: all show clean
 
@@ -32,4 +47,4 @@ show:
 	@echo $(LIB_NAME)
 
 clean:
-	rm -rf $(DEBUG_DIR)/*
+	rm -rf $(GEN_DIR)/*
