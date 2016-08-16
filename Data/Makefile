@@ -9,7 +9,7 @@ CPP_SOURCE_FULL:=$(patsubst %.cpp, $(CURR)/%.cpp, $(CPP_SOURCE))
 DEPS=$(patsubst %.o, %.d, $(OBJ_FILES))
 LIB_NAME=$(BIN_DIR)/$(MODULE).dll
 
-LDFLAGS+=$(LDFLAGS_PYTHON27)
+LDFLAGS+=$(LDFLAGS_PYTHON)
 LDFLAGS+=$(LDFLAGS_BOOST_SYSTEM)
 LDFLAGS+=$(LDFLAGS_BOOST_FILESYSTEM)
 LDFLAGS+=$(LDFLAGS_BOOST_LOG)
@@ -35,7 +35,7 @@ $(DEPS): $(GEN_DIR)/%.d: $(CURR)/%.cpp
 	@rm -rf $@.$$
 
 $(OBJ_FILES): $(GEN_DIR)/%.o: $(CURR)/%.cpp
-	$(CC) -c $(CPP_FLAGS) $(INCL) $< $(DEF_BUILD_DLL) -o $@
+	$(CC) -c $(INCL) $< $(DEF_BUILD_DLL) -o $@
 
 .PHONY: all show clean
 

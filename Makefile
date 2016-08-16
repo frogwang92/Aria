@@ -1,13 +1,15 @@
 
 CC:=g++
 LD:=g++
-CPPFLAGS:=-c -std=c++11
+CPPFLAGS:=-std=c++11
+CFLAGS:=
 LDFLAGS:=
 
 PROJ:=Aria
 COMMON:=Common
 DATA:=Data
 ALGO:=Algorithm
+ENGINE:=Engine
 
 LINK_SHARED:=-shared
 BUILDING_DLL:=BUILDING_DLL
@@ -22,9 +24,9 @@ GEN:=Debug
 BIN:=bin
 BIN_DIR:=$(ROOT)/$(BIN)
 COMMON_DIR:=$(ROOT)/$(COMMON)/
-PYTHON_INCLUDE_DIR:=/usr/include/python2.7/ 
+PYTHON_INCLUDE_DIR:=/usr/include/python2.7 
 
-LDFLAGS_PYTHON27:=-lpython2.7
+LDFLAGS_PYTHON:=-lpython2.7
 LDFLAGS_BOOST_SYSTEM:=-lboost_system 
 LDFLAGS_BOOST_FILESYSTEM:=-lboost_filesystem 
 LDFLAGS_BOOST_LOG:=-lboost_log 
@@ -32,19 +34,25 @@ LDFLAGS_BOOST_THREAD:=-lboost_thread
 LDFLAGS_BOOST_PYTHON:=-lboost_python
 LDFLAGS_BOOST_DATETIME:=-lboost_date_time
 
+COMPONENTS:=$(DATA) $(ALGO) $(ENGINE) $(PROJ)
+COMPONENTS_CLEAN:=$(patsubst %, %.clean, $(COMPONENTS))
+COMPONENTS_SHOW:=$(patsubst %, %.show, $(COMPONENTS))
+
 export
 
-.PHONY: all clean data
+all: $(COMPONENTS)
 
-all:data
+.PHONY: all $(COMPONENTS)
 
-data:
-	$(MAKE) -C $(DATA)
+$(COMPONENTS): %:
+	$(MAKE) -C $@
 
-data.clean:
-	$(MAKE) -C $(DATA) clean
-	
-clean:
+$(COMPONENTS_CLEAN): %:
+	$(MAKE) -C $(patsubst %.clean, %, $@) clean
+
+$(COMPONENTS_SHOW): %:
+	$(MAKE) -C $(patsubst %.show, %, $@) show
+
+clean: $(COMPONENTS_CLEAN)
 	rm -rf $(BIN_DIR)/*
-	$(MAKE) -C $(DATA) clean
 

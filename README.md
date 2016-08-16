@@ -6,6 +6,7 @@ C++ based backtest platform
 	Because of Python GIL, if Datafeed and Algorithm are both Python code, performance may be affected on multi core CPU.
 - Support OHLCV data.
 - A simple GUI based on amcharts.
+- Cross platform build.
 
 TODO
 ------------
@@ -13,14 +14,13 @@ TODO
 - FIX protocol support.
 - More indicators.
 - More algorithms.
-- Cross platform build.
 
 Boost library dependencies
 ------------
-boost_chrono
-boost_date_time
-boost_file_system
-boost_log
-boost_python
-boost_system
-boost_thread
+- boost_chrono
+- boost_date_time
+- boost_file_system
+- boost_log
+- boost_python
+- boost_system
+- boost_thread

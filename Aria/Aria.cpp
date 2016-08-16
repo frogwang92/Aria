@@ -13,7 +13,7 @@
 
 using namespace boost;
 
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, _TCHAR* argv[])
 {
    init_log();
    posix_time::ptime start(boost::gregorian::date(2005, 02, 01));
@@ -21,9 +21,8 @@ int _tmain(int argc, _TCHAR* argv[])
    Singleton<Engine>::instance().init_back_test(start, Day);
    Singleton<Engine>::instance().run();
    
-   _tsystem(_T("pause"));
    logging::core::get()->remove_all_sinks();
-	return 0;
+   return 0;
 }
 
 #undef INIT_LOG

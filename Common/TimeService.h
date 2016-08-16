@@ -1,7 +1,7 @@
 #pragma once
 #include "global.h"
 #include <boost/noncopyable.hpp>
-#include<boost/date_time.hpp>
+#include <boost/date_time.hpp>
 #include "IMasterTimeHandler.h"
 #include "Singleton.h"
 
@@ -11,18 +11,18 @@ class TimeService
    friend class Singleton<TimeService>;
 
 public:
-   static const boost::posix_time::ptime& now()
+   static const boost::posix_time::ptime now()
    {
       return get_current_time();
    }
 
-   static const boost::posix_time::ptime& get_current_time()
+   static const boost::posix_time::ptime get_current_time()
    {
       assert(Singleton<TimeService>::instance().m_handler != 0);
       return Singleton<TimeService>::instance().m_handler->get_current_time();
    }
 
-   static const boost::gregorian::date& get_current_date()
+   static const boost::gregorian::date get_current_date()
    {
       assert(Singleton<TimeService>::instance().m_handler != 0);
       return Singleton<TimeService>::instance().m_handler->get_current_date();

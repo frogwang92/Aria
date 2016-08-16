@@ -16,7 +16,7 @@ void BacktestTimeHandler::step()
    m_current_time += duration(m_res);
 }
 
-const boost::posix_time::ptime& BacktestTimeHandler::get_current_time()
+const boost::posix_time::ptime BacktestTimeHandler::get_current_time()
 { 
    return m_current_time; 
 }

@@ -11,7 +11,7 @@ public:
    ~BacktestTimeHandler();
 
 public:
-   virtual const boost::posix_time::ptime& get_current_time();
+   virtual const boost::posix_time::ptime get_current_time();
    void step();
 
 private:
