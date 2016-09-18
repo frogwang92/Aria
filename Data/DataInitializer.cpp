@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "DataInitializer.h"
 #include "DataFeed_OHLCV.h"
 #include "OHLCVReader_Py.h"

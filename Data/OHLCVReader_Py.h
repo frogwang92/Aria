@@ -3,7 +3,7 @@
 #include <boost/python.hpp>
 #include <boost/thread.hpp>
 #include "Symbol.h"
-#include "ohlcvreader.h"
+#include "OHLCVReader.h"
 
 class DATA_API OHLCVReader_Py :
    public OHLCVReader

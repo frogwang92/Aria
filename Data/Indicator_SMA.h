@@ -1,5 +1,5 @@
 #pragma once
-#include "indicator.h"
+#include "Indicator.h"
 #include <deque>
 #include "Symbol.h"
 

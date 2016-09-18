@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include <string>
 #include <boost/foreach.hpp>
 #include "Indicator_SMA.h"

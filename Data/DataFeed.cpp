@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "DataFeed.h"
 #include <boost/thread.hpp>
 #include <boost/foreach.hpp>

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "OHLCVReader_Py.h"
 #include "BoostExport.h"
 #include <boost/python.hpp>

@@ -6,7 +6,7 @@
 #endif
 
 #include "stdafx.h"
-#include "ohlc.h"
+#include "OHLC.h"
 
 class DATA_API OHLCV :
    public OHLC
