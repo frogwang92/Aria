@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include <string>
-#include <boost/foreach.hpp>
 #include "Indicator_SMA.h"
 #include "OHLCV.h"
 
@@ -20,8 +19,8 @@ Indicator_SMA::~Indicator_SMA(void)
 
 void Indicator_SMA::calculate(boost::shared_ptr<DataSlice> p_dataslice)
 {
-   shared_ptr<OHLCV> p_data(p_dataslice->get_data(m_symbol));
-   double result(0);
+   auto p_data(p_dataslice->get_data(m_symbol));
+   auto result = 0.0;
    if( p_data == 0 )
       return;
    if( is_warming_up )
@@ -40,8 +39,8 @@ void Indicator_SMA::calculate(boost::shared_ptr<DataSlice> p_dataslice)
 
    if(!is_warming_up)
    {
-      double sum(0);
-      BOOST_FOREACH(double val, m_data)
+      auto sum = 0.0;
+      for(auto val: m_data)
       {
          sum += val;
       }
