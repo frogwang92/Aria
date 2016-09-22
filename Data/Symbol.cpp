@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "Symbol.h"
 
 bool operator< (const Symbol& lhs, const Symbol& rhs) 

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _BLOCKING_QUEUE_H_
+#define _BLOCKING_QUEUE_H_
+
 #include <boost/noncopyable.hpp>
 #include <deque>
 #include <boost/thread/mutex.hpp>
@@ -59,3 +61,5 @@ public:
       return res;
    }
 };
+
+#endif

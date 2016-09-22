@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _INDICATOR_SMA_H_
+#define _INDICATOR_SMA_H_
+
 #include "Indicator.h"
 #include <deque>
 #include "Symbol.h"
@@ -20,3 +23,4 @@ private:
    bool is_warming_up;
 };
 
+#endif

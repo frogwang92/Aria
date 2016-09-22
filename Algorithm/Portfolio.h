@@ -1,5 +1,7 @@
-#pragma once
-#include "../Common/global.h"
+#ifndef _PORTFOLIO_H_
+#define _PORTFOLIO_H_
+
+#include "global.h"
 #include <map>
 #include <boost/noncopyable.hpp>
 #include <boost/thread.hpp>
@@ -34,3 +36,4 @@ private:
    boost::mutex m_mutex;
 };
 
+#endif

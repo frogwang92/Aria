@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "Singleton.h"
 #include "AlgorithmInitializer.h"
 #include "Portfolio.h"

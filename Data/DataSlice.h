@@ -1,9 +1,16 @@
 #pragma once
-#ifdef DATA_EXPORTS
-#define DATA_API __declspec(dllexport)
-#else
-#define DATA_API __declspec(dllimport)
-#endif
+#ifndef _DATASLICE_H_
+#define _DATASLICE_H_
+
+#include "Common.h"  
+
+#ifdef DATA_EXPORTS  
+#define DATA_CLASS DLL_EXPORT_CLASS_DECL  
+#define DATA_API DLL_EXPORT_DECL  
+#else  
+#define DATA_CLASS DLL_IMPORT_CLASS_DECL  
+#define DATA_API DLL_IMPORT_DECL  
+#endif 
 
 #include <boost/date_time.hpp>
 #include <map>
@@ -15,7 +22,7 @@
 
 class OHLCV;
 
-class DATA_API DataSlice
+class DATA_CLASS DataSlice
 {
 public:
    DataSlice(void);
@@ -39,3 +46,4 @@ private:
    std::map<Symbol, std::map<std::string, double> > m_indicators;
 };
 
+#endif

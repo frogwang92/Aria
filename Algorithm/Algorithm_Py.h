@@ -1,5 +1,7 @@
-#pragma once
-#include "algorithm.h"
+#ifndef _ALGORITHM_PY_H_
+#define _ALGORITHM_PY_H_
+
+#include "Algorithm.h"
 #include <boost/python.hpp>
 
 class Algorithm_Py :
@@ -19,3 +21,4 @@ private:
    bool m_initialized;
 };
 
+#endif

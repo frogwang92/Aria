@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "TradeJobNode.h"
 
 TradeJobNode::TradeJobNode(const boost::posix_time::ptime & trade_time, JobType type, Symbol symbol, int shares, double price, double cash)

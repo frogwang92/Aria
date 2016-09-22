@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _ALGORITHM_MANAGER_H_
+#define _ALGORITHM_MANAGER_H_
+
 #include "global.h"
 #include "IAlgorithmManager.h"
 
@@ -34,3 +36,4 @@ private:
    bool m_active;
 };
 
+#endif

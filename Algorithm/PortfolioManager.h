@@ -1,10 +1,12 @@
-#pragma once
-#include "../Common/global.h"
-#include "../Common/BlockingQueue.h"
+#ifndef _PORTFOLIO_MANAGER_H_
+#define _PORTFOLIO_MANAGER_H_
+
+#include "global.h"
+#include "BlockingQueue.h"
 #include "../Data/Symbol.h"
 #include <boost/thread/mutex.hpp>
 #include <boost/date_time.hpp>
-#include "../Common/mode.h"
+#include "mode.h"
 
 class Portfolio;
 class Brokerage;
@@ -39,3 +41,4 @@ private:
    void do_job();
 };
 
+#endif

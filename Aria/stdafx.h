@@ -3,13 +3,17 @@
 // are changed infrequently
 //
 
-#pragma once
+#ifndef _STDAFX_ARIA_H_
+#define _STDAFX_ARIA_H_
 
+#ifdef WIN32
 #include "targetver.h"
+#include <tchar.h>
+#endif
 
 #include <stdio.h>
-#include <tchar.h>
 
 
+#endif
 
 // TODO: reference additional headers your program requires here

@@ -3,7 +3,7 @@
 #include "BoostExport.h"
 #include <boost/python.hpp>
 #include <boost/thread.hpp>
-#include "../Common/ScopedGILRelease.h"
+#include "ScopedGILRelease.h"
 #include "logger.h"
 
 OHLCVReader_Py::OHLCVReader_Py(const Symbol& symbol)

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "OHLC.h"
 
 using namespace boost::posix_time;

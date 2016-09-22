@@ -3,7 +3,10 @@
 // are changed infrequently
 //
 
-#pragma once
+#ifndef _STDAFX_ENGINE_H_
+#define _STDAFX_ENGINE_H_
+
+#ifdef WIN32
 
 #include "targetver.h"
 
@@ -11,7 +14,9 @@
 // Windows Header Files:
 #include <windows.h>
 
-
+#endif
 
 // TODO: reference additional headers your program requires here
-#pragma warning(disable:4251)
+
+#endif
+

@@ -1,5 +1,7 @@
-#pragma once
-#include <python.h>
+#ifndef _SCOPEDGILRELEASE_H_
+#define _SCOPEDGILRELEASE_H_
+
+#include <Python.h>
 
 struct ScopedGILAcquire
 {
@@ -32,3 +34,4 @@ private:
    PyThreadState* m_thread_state;
 };
 
+#endif

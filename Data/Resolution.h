@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _RESOLUTION_H_
+#define _RESOLUTION_H_
+
 #include <boost/date_time.hpp>
 enum Resolution
 {
@@ -16,3 +19,5 @@ inline boost::posix_time::time_duration duration(Resolution res)
 {
    return boost::posix_time::time_duration(0, 0, res);
 }
+
+#endif

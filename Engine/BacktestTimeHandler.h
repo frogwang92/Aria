@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _BACKTEST_TIMEHANDLER_H_
+#define _BACKTEST_TIMEHANDLER_H_
+
 #include "IMasterTimeHandler.h"
 #include "../Data/Resolution.h"
 #include <boost/thread.hpp>
@@ -20,3 +22,4 @@ private:
    boost::mutex m_mutex;
 };
 
+#endif

@@ -1,14 +1,21 @@
 #pragma once
-#ifdef DATA_EXPORTS
-#define DATA_API __declspec(dllexport)
-#else
-#define DATA_API __declspec(dllimport)
-#endif
+#ifndef _OHLCV_H_
+#define _OHLCV_H_
+
+#include "Common.h"  
+
+#ifdef DATA_EXPORTS  
+#define DATA_CLASS DLL_EXPORT_CLASS_DECL  
+#define DATA_API DLL_EXPORT_DECL  
+#else  
+#define DATA_CLASS DLL_IMPORT_CLASS_DECL  
+#define DATA_API DLL_IMPORT_DECL  
+#endif 
 
 #include "stdafx.h"
 #include "OHLC.h"
 
-class DATA_API OHLCV :
+class DATA_CLASS OHLCV :
    public OHLC
 {
 public:
@@ -30,3 +37,5 @@ inline ostream & operator<<(ostream &stream, const OHLCV & right)
 
    return stream;
 }
+
+#endif

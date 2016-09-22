@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _INDICATOR_H_
+#define _INDICATOR_H_
+
 #include "DataSlice.h"
 #include <string>
 #include <boost/shared_ptr.hpp>
@@ -18,3 +21,4 @@ private:
    std::string m_name;
 };
 
+#endif

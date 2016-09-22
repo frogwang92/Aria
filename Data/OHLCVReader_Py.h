@@ -1,11 +1,13 @@
 #pragma once
+#ifndef _OHLCVREADER_PY_H_
+#define _OHLCVREADER_PY_H_
 
 #include <boost/python.hpp>
 #include <boost/thread.hpp>
 #include "Symbol.h"
 #include "OHLCVReader.h"
 
-class DATA_API OHLCVReader_Py :
+class DATA_CLASS OHLCVReader_Py :
    public OHLCVReader
 {
 public:
@@ -28,3 +30,4 @@ private:
    shared_ptr<boost::thread> m_pthread;
 };
 
+#endif

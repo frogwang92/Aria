@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _OHLCVREADER_H_
+#define _OHLCVREADER_H_
+
 #include "OHLCV.h"
 #include "../Common/BlockingQueue.h"
 #include <boost/noncopyable.hpp>
@@ -21,3 +24,4 @@ protected:
    BlockingQueue<boost::shared_ptr<OHLCV> > m_queue;
 };
 
+#endif

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "Algorithm_Buyandhold.h"
 #include "../Data/DataSlice.h"
 #include "../Data/OHLCV.h"

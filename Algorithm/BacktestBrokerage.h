@@ -1,5 +1,7 @@
-#pragma once
-#include "brokerage.h"
+#ifndef _BACKTEST_BROKERAGE_H_
+#define _BACKTEST_BROKERAGE_H_
+
+#include "Brokerage.h"
 
 class BacktestBrokerage :
    public Brokerage
@@ -16,3 +18,4 @@ public:
    virtual int normalize_sell_shares(double available_shares, double percentage);
 };
 
+#endif

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include <boost/python.hpp>
 #include "Algorithm_Py.h"
 #include "BoostExport.h"

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "Portfolio.h"
 #include "Brokerage.h"
 #include "AlgorithmManager.h"

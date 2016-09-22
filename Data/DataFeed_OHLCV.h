@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _DATAFEED_OHLCV_H_
+#define _DATAFEED_OHLCV_H_
+
 #include "DataFeed.h"
 #include <boost/noncopyable.hpp>
 
@@ -13,3 +16,4 @@ protected:
    void pumping_data();
 };
 
+#endif

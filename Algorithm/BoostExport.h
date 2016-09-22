@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _BOOSTEXPORT_ALGORITHM_H_
+#define _BOOSTEXPORT_ALGORITHM_H_
+
 #include <boost/python.hpp>
 #include <datetime.h>
 #include "global.h"
@@ -18,3 +20,5 @@ BOOST_PYTHON_MODULE(Algorithm)
    class_<Algorithm_Py, bases<Algorithm> >("Algorithm_Py")
       ;
 }
+
+#endif

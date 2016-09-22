@@ -1,5 +1,7 @@
-#pragma once
-#include "../Common/global.h"
+#ifndef _BROKERAGE_H_
+#define _BROKERAGE_H_
+
+#include "global.h"
 #include "../Data/Symbol.h"
 #include <boost/date_time.hpp>
 
@@ -25,3 +27,4 @@ protected:
    weak_ptr<PortfolioManager> m_portfolio_manager;
 };
 
+#endif

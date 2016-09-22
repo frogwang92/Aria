@@ -5,7 +5,7 @@
 
 #pragma once
 
-#ifdef WINDOWS
+#ifdef WIN32 
 
 #include "targetver.h"
 

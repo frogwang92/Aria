@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _BOOSTEXPORT_H_
+#define _BOOSTEXPORT_H_
+
 #include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/date_time.hpp>
@@ -111,3 +114,5 @@ BOOST_PYTHON_MODULE(DataFeed)
       ;
    
 }
+
+#endif

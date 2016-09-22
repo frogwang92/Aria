@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _TRADE_JOB_NODE_H_
+#define _TRADE_JOB_NODE_H_
+
 #include "../Data/Symbol.h"
 #include <iostream>
 #include <boost/date_time.hpp>
@@ -39,3 +41,5 @@ inline ostream& operator<< ( ostream& os, const TradeJobNode& tradenode)
       << tradenode.get_price() << ","
       << tradenode.get_cash();
 }
+
+#endif

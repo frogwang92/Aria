@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _ALGORITHM_H_
+#define _ALGORITHM_H_
+
 #include "global.h"
 #include "../Data/Symbol.h"
 #include <boost/date_time.hpp>
@@ -21,3 +23,4 @@ private:
    weak_ptr<PortfolioManager> m_portfolio_manager;
 };
 
+#endif

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "PortfolioManager.h"
 #include <boost/thread.hpp>
 #include "Brokerage.h"

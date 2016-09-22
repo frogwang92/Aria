@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _DATAFEED_H_
+#define _DATAFEED_H_
+
 #include "BlockingQueue.h"
 #include "global.h"
 
@@ -57,3 +60,4 @@ private:
    shared_ptr<boost::thread> m_pthread;
 };
 
+#endif

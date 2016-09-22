@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SCHEDULER_H_
+#define _SCHEDULER_H_
+
 #include "global.h"
 #include <map>
 #include <functional>
@@ -31,3 +33,4 @@ private:
    Task m_task;
 };
 
+#endif

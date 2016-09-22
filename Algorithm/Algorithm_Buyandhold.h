@@ -1,6 +1,8 @@
-#pragma once
+#ifndef _ALGORITHM_BUYANDHOLD_H_
+#define _ALGORITHM_BUYANDHOLD_H_
+
 #include "global.h"
-#include "algorithm.h"
+#include "Algorithm.h"
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "../Data/Symbol.h"
 class Algorithm_Buyandhold :
@@ -19,3 +21,4 @@ private:
    bool m_bought;
 };
 
+#endif

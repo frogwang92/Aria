@@ -7,7 +7,8 @@ CPP_SOURCE:=$(wildcard *.cpp)
 OBJ_FILES:=$(patsubst %.cpp, $(GEN_DIR)/%.o, $(CPP_SOURCE))
 CPP_SOURCE_FULL:=$(patsubst %.cpp, $(CURR)/%.cpp, $(CPP_SOURCE))
 DEPS=$(patsubst %.o, %.d, $(OBJ_FILES))
-LIB_NAME=$(BIN_DIR)/$(MODULE).dll
+#LIB_NAME=$(BIN_DIR)/$(MODULE).dll
+LIB_NAME=$(BIN_DIR)/lib$(MODULE).so
 
 LDFLAGS+=$(LDFLAGS_PYTHON)
 LDFLAGS+=$(LDFLAGS_BOOST_SYSTEM)
@@ -25,7 +26,8 @@ DEF_BUILD_DLL+=-DDATA_EXPORTS
 all:$(LIB_NAME)
 
 $(LIB_NAME):$(OBJ_FILES)
-	$(LD) $(LINK_SHARED) -o $@ $^ $(LDFLAGS) -Wl,--out-implib=$(LIB_NAME).a
+	#$(LD) $(LINK_SHARED) -o $@ $^ $(LDFLAGS) -Wl,--out-implib=$(LIB_NAME).a
+	$(LD) $(LINK_SHARED) -o $@ $^ $(LDFLAGS)
 
 -include $(DEPS)
 
@@ -35,7 +37,7 @@ $(DEPS): $(GEN_DIR)/%.d: $(CURR)/%.cpp
 	@rm -rf $@.$$
 
 $(OBJ_FILES): $(GEN_DIR)/%.o: $(CURR)/%.cpp
-	$(CC) -c $(INCL) $< $(DEF_BUILD_DLL) -o $@
+	$(CC) -c -Wall -fPIC $(INCL) $< $(DEF_BUILD_DLL) -o $@
 
 .PHONY: all show clean
 

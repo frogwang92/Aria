@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "Portfolio.h"
 #include "../Data/DataSlice.h"
 #include "../Data/OHLCV.h"
