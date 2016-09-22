@@ -23,26 +23,26 @@ DataFeed_OHLCV::~DataFeed_OHLCV(void)
 
 void DataFeed_OHLCV::pumping_data()
 {
-   ptime cur_time = get_starttime();
+   auto cur_time = get_starttime();
    time_duration interval(0, 0, get_res());
    while(cur_time <= get_endtime())
    {
-      std::vector<shared_ptr<OHLCVReader> >::iterator iter = m_readers.begin();
+      auto iter = m_readers.begin();
       //first reader as time-axis
-      shared_ptr<OHLCV> p_first_data = (*iter)->get();
+      auto p_first_data = (*iter)->get();
       if( p_first_data->start_time() >= cur_time )
       {
          while( p_first_data->start_time() > cur_time )
          {
             cur_time = cur_time + interval;
          }
-         shared_ptr<DataSlice> p_slice(new DataSlice(cur_time, get_res()));
+         auto p_slice = make_shared<DataSlice>(cur_time, get_res());
          p_slice->add_data( (*iter)->get_symbol(), p_first_data);
          ++iter;
          // get from other readers
          while( iter != m_readers.end())
          {
-            shared_ptr<OHLCV> p_data = (*iter)->get();
+            auto p_data = (*iter)->get();
             if( p_data->start_time() == cur_time )
             {
                p_slice->add_data( (*iter)->get_symbol(), p_data);

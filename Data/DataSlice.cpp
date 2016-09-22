@@ -27,7 +27,7 @@ DataSlice::~DataSlice(void)
 
 bool DataSlice::add_data(Symbol symbol, const boost::shared_ptr<OHLCV>& p_data)
 {
-   std::pair<std::map<Symbol, shared_ptr<OHLCV> >::iterator, bool> p = m_data.insert(std::make_pair(symbol, p_data));
+   auto p = m_data.insert(std::make_pair(symbol, p_data));
    return p.second;
 }
 
@@ -38,9 +38,7 @@ boost::shared_ptr<OHLCV> DataSlice::get_data(const Symbol& symbol)
 
 bool DataSlice::add_indicator(Symbol symbol, const std::string& indicator_name, double value)
 {
-   std::map<std::string, double>& indicator_map = m_indicators[symbol];
-
-   std::pair<std::map<std::string, double>::iterator, bool> p 
-      = indicator_map.insert(std::make_pair(indicator_name, value));
+   auto& indicator_map = m_indicators[symbol];
+   auto p = indicator_map.insert(std::make_pair(indicator_name, value));
    return p.second;
 }

@@ -20,7 +20,7 @@ OHLCVReader_Py::~OHLCVReader_Py(void)
 
 void OHLCVReader_Py::read()
 {
-   m_pthread = shared_ptr<boost::thread>(new boost::thread(boost::bind(&OHLCVReader_Py::read_impl, this)));
+   m_pthread = make_shared<boost::thread>(boost::bind(&OHLCVReader_Py::read_impl, this));
 }
 
 void OHLCVReader_Py::read_impl()
@@ -45,7 +45,7 @@ void OHLCVReader_Py::push_data(int open, int high, int low, int close, int adj_c
 {
    Py_BEGIN_ALLOW_THREADS
 
-   shared_ptr<OHLCV> p_ohlcv(new OHLCV(open, high, low, close, adj_close, starttime, res, vol));
+   auto p_ohlcv = make_shared<OHLCV>(open, high, low, close, adj_close, starttime, res, vol);
    datalog << *p_ohlcv;
    m_queue.push(p_ohlcv);
 

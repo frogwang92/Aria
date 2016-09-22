@@ -20,7 +20,7 @@ boost::shared_ptr<IDataFeed> DataInitializer::init()
    //
    ptime start(boost::gregorian::date(2005, 02, 01));
    ptime end(boost::gregorian::date(2016, 02, 01));
-   shared_ptr<DataFeed> p_feed = shared_ptr<DataFeed>(new DataFeed_OHLCV(start, end, Day));
+   auto p_feed =dynamic_pointer_cast<DataFeed>(make_shared<DataFeed_OHLCV>(start, end, Day));
    p_feed->add_reader(boost::shared_ptr<OHLCVReader>(new OHLCVReader_Py(Symbol(600000))));
    p_feed->register_indicator(boost::shared_ptr<Indicator>(new Indicator_SMA(Symbol(600000), "SMA_5", 5)));
    p_feed->register_indicator(boost::shared_ptr<Indicator>(new Indicator_SMA(Symbol(600000), "SMA_9", 9)));

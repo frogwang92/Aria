@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "DataFeed.h"
 #include <boost/thread.hpp>
-#include <boost/foreach.hpp>
 #include "Indicator.h"
 #include "OHLCVReader.h"
 
@@ -48,7 +47,7 @@ void DataFeed::run()
 {
    if (!is_active())
    {
-      BOOST_FOREACH(shared_ptr<OHLCVReader> reader, m_readers)
+      for(auto reader: m_readers)
       {
          reader->read();
       }
@@ -78,7 +77,7 @@ void DataFeed::register_indicator(const shared_ptr<Indicator>& indicator)
 void DataFeed::push_slice(const shared_ptr<DataSlice>& p_slice)
 {
    m_queue.push(p_slice);
-   BOOST_FOREACH(boost::shared_ptr<Indicator> indicator, m_indicators)
+   for(auto indicator: m_indicators)
    {
       indicator->calculate(p_slice);
    }
