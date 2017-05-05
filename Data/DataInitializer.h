@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _DATAINITIALIZER_H_
 #define _DATAINITIALIZER_H_
 
@@ -22,7 +21,7 @@ class DATA_CLASS DataInitializer
 friend class Singleton<DataInitializer>;
 
 public:
-   boost::shared_ptr<IDataFeed> init();
+    shared_ptr<IDataFeed> init();
 
 protected:
    DataInitializer(void);

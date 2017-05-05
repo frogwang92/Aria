@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _OHLCVREADER_PY_H_
 #define _OHLCVREADER_PY_H_
 
@@ -20,7 +19,7 @@ public:
 
 public:
    // callback func used by python script
-   //void push_data(boost::shared_ptr<OHLCV> p_data);
+   //void push_data(shared_ptr<OHLCV> p_data);
    void push_data(int open, int close, int high, int low, int adj_close, const boost::posix_time::ptime& starttime, Resolution res, int vol);
 
 private:

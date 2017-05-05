@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "PortfolioManager.h"
 #include <boost/thread.hpp>
 #include "Brokerage.h"
@@ -31,7 +31,7 @@ void PortfolioManager::buy(const boost::posix_time::ptime& time_point, Symbol sy
    double cash_available = m_portfolio.lock()->get_cash_available();
    double cash_request = cash * percentage;
    int share = m_brokerage.lock()->normalize_buy_shares(cash_request, price);
-   boost::shared_ptr<TradeJobNode> p_node(new TradeJobNode(time_point, TradeJobNode::Buy, symbol, share, price, 0));
+    shared_ptr<TradeJobNode> p_node(new TradeJobNode(time_point, TradeJobNode::Buy, symbol, share, price, 0));
    if( m_mode == Realtime)
    {
       push_job_node(p_node);
@@ -46,7 +46,7 @@ void PortfolioManager::sell(const boost::posix_time::ptime& time_point, Symbol s
 {
    double shares = m_portfolio.lock()->get_hold_share_available(symbol);
    int request_shares = m_brokerage.lock()->normalize_sell_shares(shares, percentage);
-   boost::shared_ptr<TradeJobNode> p_node(new TradeJobNode(time_point, TradeJobNode::Sell, symbol, request_shares, price, 0));
+    shared_ptr<TradeJobNode> p_node(new TradeJobNode(time_point, TradeJobNode::Sell, symbol, request_shares, price, 0));
    if( m_mode == Realtime)
    {
       push_job_node(p_node);
@@ -109,7 +109,7 @@ void PortfolioManager::do_job()
 {
    while(true)
    {
-      boost::shared_ptr<TradeJobNode> p_node(m_jobqueue.pop());
+       shared_ptr<TradeJobNode> p_node(m_jobqueue.pop());
       process_job_node_sync(p_node);
    }
 }

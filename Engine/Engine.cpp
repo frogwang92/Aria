@@ -1,7 +1,6 @@
 // Engine.cpp : Defines the exported functions for the DLL application.
 //
 
-#include "stdafx.h"
 #include <iostream>
 
 #include "global.h"
@@ -11,13 +10,10 @@
 #include "../Algorithm/AlgorithmInitializer.h"
 #include "../Algorithm/IAlgorithmManager.h"
 #include "../Data/IDataFeed.h"
-#include "ScopedGILRelease.h"
 #include "../Data/DataSlice.h"
 #include "BacktestTimeHandler.h"
 #include "TimeService.h"
 #include "Scheduler.h"
-
-using namespace boost;
 
 // This is the constructor of a class that has been exported.
 // see Engine.h for the class definition
@@ -68,7 +64,7 @@ bool Engine::do_cycle()
 {
    if (m_feed->head()->get_start_time() <= TimeService::now())
    {
-      boost::shared_ptr<DataSlice> p_data;
+       shared_ptr<DataSlice> p_data;
       if ((*m_feed) >> p_data)
       {
          m_algorithm_manager->do_cycle(p_data);
@@ -78,6 +74,6 @@ bool Engine::do_cycle()
          return false;
       }
    }
-   dynamic_pointer_cast<BacktestTimeHandler>(m_pTimeHandler)->step();
+    std::dynamic_pointer_cast<BacktestTimeHandler>(m_pTimeHandler)->step();
    return true;
 }

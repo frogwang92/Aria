@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _RESOLUTION_H_
 #define _RESOLUTION_H_
 

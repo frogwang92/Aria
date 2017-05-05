@@ -1,7 +1,5 @@
-#include "stdafx.h"
+
 #include <boost/date_time.hpp>
-#include <iostream>
-#include <vector>
 
 #include "logger.h"
 #include "DataFeed_OHLCV.h"
@@ -9,7 +7,6 @@
 #include "DataSlice.h"
 #include "OHLCVReader.h"
 
-using namespace boost;
 using namespace boost::posix_time;
 
 DataFeed_OHLCV::DataFeed_OHLCV(const boost::posix_time::ptime& start_time, const boost::posix_time::ptime& end_time, Resolution res)
@@ -36,7 +33,7 @@ void DataFeed_OHLCV::pumping_data()
          {
             cur_time = cur_time + interval;
          }
-         auto p_slice = make_shared<DataSlice>(cur_time, get_res());
+          auto p_slice = std::make_shared<DataSlice>(cur_time, get_res());
          p_slice->add_data( (*iter)->get_symbol(), p_first_data);
          ++iter;
          // get from other readers

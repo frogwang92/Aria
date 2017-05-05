@@ -1,7 +1,7 @@
 import tushare as ts
-import DataFeed
-from datetime import *
 from DataFeed import *
+from datetime import *
+
 
 def run(instance):
    pdf = ts.get_h_data('600000',start='2005-02-01',end='2016-02-01')

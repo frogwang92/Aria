@@ -1,7 +1,7 @@
-import DataFeed
 import csv
-from datetime import *
 from DataFeed import *
+from datetime import *
+
 
 def run(instance):
    #print "start reading..."

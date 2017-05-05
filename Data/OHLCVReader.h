@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _OHLCVREADER_H_
 #define _OHLCVREADER_H_
 
@@ -18,10 +17,11 @@ public:
 public:
    virtual void read() = 0;
    virtual const Symbol& get_symbol() = 0;
-   boost::shared_ptr<OHLCV> get() { return m_queue.pop(); }
+
+    shared_ptr<OHLCV> get() { return m_queue.pop(); }
 
 protected:
-   BlockingQueue<boost::shared_ptr<OHLCV> > m_queue;
+    BlockingQueue<shared_ptr<OHLCV> > m_queue;
 };
 
 #endif

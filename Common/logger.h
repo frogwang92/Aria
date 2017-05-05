@@ -1,6 +1,9 @@
-#pragma once
+#ifndef _LOGGER_H_
+#define _LOGGER_H_
 
-#include "global.h"
+#define BOOST_LOG_DYN_LINK 1
+//#include "global.h"
+#include <boost/shared_ptr.hpp>   // use boost::shared_ptr instead of std::shared_ptr
 #include <boost/make_shared.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/log/core.hpp>
@@ -26,16 +29,15 @@ namespace sinks   = boost::log::sinks;
 namespace expr    = boost::log::expressions;
 namespace keywords = boost::log::keywords;
 
-enum sign_severity_level
-{
-   trade,
-   portfolio,
-   data,
-   info,
-   debug,
-   trace,
-   warning,
-   error
+enum sign_severity_level {
+    trade,
+    portfolio,
+    data,
+    info,
+    debug,
+    trace,
+    warning,
+    error
 };
 
 BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(my_logger, src::severity_logger_mt<sign_severity_level>)
@@ -47,3 +49,5 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(my_logger, src::severity_logger_mt<sign_s
 #define tradelog BOOST_LOG_SEV(my_logger::get(), trade)
 #define portfoliolog BOOST_LOG_SEV(my_logger::get(), portfolio)
 #define datalog BOOST_LOG_SEV(my_logger::get(), data)
+
+#endif

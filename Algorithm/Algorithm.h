@@ -4,6 +4,7 @@
 #include "global.h"
 #include "../Data/Symbol.h"
 #include <boost/date_time.hpp>
+
 class DataSlice;
 class PortfolioManager;
 

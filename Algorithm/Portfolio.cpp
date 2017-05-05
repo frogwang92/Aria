@@ -1,8 +1,7 @@
-#include "stdafx.h"
+
 #include "Portfolio.h"
 #include "../Data/DataSlice.h"
 #include "../Data/OHLCV.h"
-#include <iostream>
 
 Portfolio::Portfolio(double init_cash)
    :m_cash(init_cash),
@@ -13,7 +12,7 @@ Portfolio::Portfolio(double init_cash)
 
 Portfolio::~Portfolio(void)
 {
-   std::cout << "Portfolio dispose" << std::endl;
+    //std::cout << "Portfolio dispose" << std::endl;
 }
 
 void Portfolio::update_portfolio(double cash_change, double cash_freezing_change, Symbol symbol, double hold_change, double hold_in_freezing_change)

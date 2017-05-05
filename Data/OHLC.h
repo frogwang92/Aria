@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _OHLC_H_
 #define _OHLC_H_
 

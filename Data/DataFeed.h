@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _DATAFEED_H_
 #define _DATAFEED_H_
 
@@ -41,7 +40,8 @@ public:
 protected:
    virtual shared_ptr<DataSlice> get();
    virtual void pumping_data() = 0;
-   void push_slice(const boost::shared_ptr<DataSlice>& p_slice);
+
+    void push_slice(const shared_ptr<DataSlice> &p_slice);
    
 protected:
    bool m_active;
