@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include <string>
 #include "Indicator_SMA.h"
 #include "OHLCV.h"
@@ -17,7 +17,7 @@ Indicator_SMA::~Indicator_SMA(void)
 {
 }
 
-void Indicator_SMA::calculate(boost::shared_ptr<DataSlice> p_dataslice)
+void Indicator_SMA::calculate(shared_ptr<DataSlice> p_dataslice)
 {
    auto p_data(p_dataslice->get_data(m_symbol));
    auto result = 0.0;

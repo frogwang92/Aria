@@ -11,7 +11,6 @@
 #define ENGINE_API DLL_IMPORT_DECL  
 #endif 
 
-#pragma once
 #include "global.h"
 #include "Singleton.h"
 #include <boost/python.hpp>
@@ -41,14 +40,14 @@ private:
    void init();
 
 private:
-   static boost::shared_ptr<Engine> m_instance;
+	static shared_ptr<Engine> m_instance;
 
 private:
    PyThreadState* m_thread_state;
-   boost::shared_ptr<IDataFeed> m_feed;
-   boost::shared_ptr<IAlgorithmManager> m_algorithm_manager;
-   boost::shared_ptr<IMasterTimeHandler> m_pTimeHandler;
-   boost::shared_ptr<Scheduler> m_pScheduler;
+	shared_ptr<IDataFeed> m_feed;
+	shared_ptr<IAlgorithmManager> m_algorithm_manager;
+	shared_ptr<IMasterTimeHandler> m_pTimeHandler;
+	shared_ptr<Scheduler> m_pScheduler;
 
    Mode m_mode;
    Resolution m_res;

@@ -1,8 +1,7 @@
 import DataFeed
-import Algorithm
-from datetime import *
-from DataFeed import *
 from Algorithm import *
+from DataFeed import *
+from datetime import *
 
 sym = DataFeed.Symbol(600000)
 b_bought = False

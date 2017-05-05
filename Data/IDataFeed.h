@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _IDATAFEED_H_
 #define _IDATAFEED_H_
 

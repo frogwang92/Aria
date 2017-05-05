@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _BOOSTEXPORT_H_
 #define _BOOSTEXPORT_H_
 
@@ -6,6 +5,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/date_time.hpp>
 #include <datetime.h>
+#include "global.h"
 #include "Symbol.h"
 #include "OHLCV.h"
 #include "Resolution.h"
@@ -74,9 +74,9 @@ BOOST_PYTHON_MODULE(DataFeed)
    PyDateTime_IMPORT;
    ptime_from_python_datetime_str();
    to_python_converter<const boost::posix_time::ptime, ptime_to_python>();
-   register_ptr_to_python< boost::shared_ptr<DataSlice> >();
-   register_ptr_to_python< boost::shared_ptr<OHLCVReader_Py> >();
-   register_ptr_to_python< boost::shared_ptr<OHLCV> >();
+    register_ptr_to_python<std::shared_ptr<DataSlice> >();
+    register_ptr_to_python<std::shared_ptr<OHLCVReader_Py> >();
+    register_ptr_to_python<std::shared_ptr<OHLCV> >();
 
    enum_<Resolution>("Resolution")
       .value("Second", Second)

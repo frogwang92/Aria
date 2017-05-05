@@ -7,7 +7,6 @@
 #include "Algorithm.h"
 #include <boost/date_time.hpp>
 
-using namespace boost;
 using namespace boost::python;
 
 

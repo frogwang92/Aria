@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "DataSlice.h"
 #include "OHLCV.h"
 
@@ -25,13 +25,13 @@ DataSlice::~DataSlice(void)
 {
 }
 
-bool DataSlice::add_data(Symbol symbol, const boost::shared_ptr<OHLCV>& p_data)
+bool DataSlice::add_data(Symbol symbol, const shared_ptr<OHLCV> &p_data)
 {
    auto p = m_data.insert(std::make_pair(symbol, p_data));
    return p.second;
 }
 
-boost::shared_ptr<OHLCV> DataSlice::get_data(const Symbol& symbol)
+shared_ptr<OHLCV> DataSlice::get_data(const Symbol &symbol)
 {
    return m_data[symbol];
 }

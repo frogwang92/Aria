@@ -1,10 +1,8 @@
-#include "stdafx.h"
+
 #include "DataFeed.h"
-#include <boost/thread.hpp>
 #include "Indicator.h"
 #include "OHLCVReader.h"
 
-using namespace boost;
 using namespace boost::posix_time;
 
 DataFeed::DataFeed(void)
