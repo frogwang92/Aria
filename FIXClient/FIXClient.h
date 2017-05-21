@@ -36,6 +36,21 @@ private:
     void fromApp(const FIX::Message &message, const FIX::SessionID &sessionID)
     throw(FIX::FieldNotFound, FIX::IncorrectDataFormat, FIX::IncorrectTagValue, FIX::UnsupportedMessageType);
 
+    /*
+     0	=	 Bid
+     1	=	 Offer
+     2	=	 Trade
+     3	=	 Index Value
+     4	=	 Opening Price
+     5	=	 Closing Price
+     6	=	 Settlement Price
+     7	=	 Trading Session High Price
+     8	=	 Trading Session Low Price
+     9	=	 Trading Session VWAP Price
+     A	=	 mbalance -- OKCoin not supported
+     B	=	 Trade Volume
+     C	=	 Open Interest -- OKCoin not supported
+     */
     FIX::Message createOrderBookRequest();
 
     void onMessage(const FIX44::MarketDataSnapshotFullRefresh& message, const FIX::SessionID &sessionID);

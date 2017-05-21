@@ -19,7 +19,7 @@ int main(){
         FIXClient client;
         FIX::FileStoreFactory storeFactory( settings );
         FIX::ScreenLogFactory logFactory( settings );
-        FIX::SocketInitiator initiator( client, storeFactory, settings, logFactory );
+        FIX::SocketInitiator initiator( client, storeFactory, settings);
 
         initiator.start();
         client.run();

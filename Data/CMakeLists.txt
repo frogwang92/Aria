@@ -16,6 +16,6 @@ SET(DATA_SRC
         OHLCVReader.cpp OHLCVReader.h
         OHLCVReader_Py.cpp OHLCVReader_Py.h
         Symbol.cpp Symbol.h
-        )
+        DataSeries.cpp DataSeries.h)
 
 ADD_LIBRARY(Data SHARED ${DATA_SRC})

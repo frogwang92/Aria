@@ -2523,6 +2523,7 @@
     <field name='Text' required='N' />
     <field name='EncodedTextLen' required='N' />
     <field name='EncodedText' required='N' />
+    <field name='Side' required='N' />
    </group>
   </component>
   <component name='RFQReqGrp'>
