@@ -24,7 +24,8 @@ void OHLCVReader_Py::read_impl() {
         initDataFeed();
         object module(handle<>(borrowed(PyImport_AddModule("__main__"))));
         object dictionary = module.attr("__dict__");
-        PyRun_SimpleString("execfile('TuShare_OHLCV_day.py')");
+        //PyRun_SimpleString("execfile('TuShare_OHLCV_day.py')");
+        PyRun_SimpleString("execfile('CSV_OHLCV.py')");
         object run(module.attr("run"));
         run(ptr(this));
     }
