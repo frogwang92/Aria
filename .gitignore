@@ -248,3 +248,4 @@ ModelManifest.xml
 amstockchart/
 /.vscode
 *.pyc
+将删除 .gitignore
