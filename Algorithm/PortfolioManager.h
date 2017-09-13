@@ -9,36 +9,41 @@
 #include "mode.h"
 
 class Portfolio;
+
 class Brokerage;
+
 class TradeJobNode;
+
 class DataSlice;
 
-class PortfolioManager
-{
+class PortfolioManager {
 public:
-   PortfolioManager();
-   explicit PortfolioManager(Mode mode);
-   ~PortfolioManager(void);
+    PortfolioManager(shared_ptr<Portfolio> portfolio, shared_ptr<Brokerage> brokerage);
+
+    ~PortfolioManager(void);
 
 public:
-   void buy(const boost::posix_time::ptime& time_point, Symbol symbol, double price, double percentage);
-   void sell(const boost::posix_time::ptime& time_point, Symbol symbol, double price, double percentage);
-   void process_job_node_sync(const shared_ptr<TradeJobNode>& job_node);
-   void push_job_node(const shared_ptr<TradeJobNode>& job_node) { m_jobqueue.push(job_node); }
-   void run();
-   double query_net_value(const shared_ptr<DataSlice>& p_data);
+    void buy(const boost::posix_time::ptime &time_point, Symbol symbol, double price, double percentage);
 
-public:
-   inline void register_portfolio(const shared_ptr<Portfolio>& portfolio) { m_portfolio = weak_ptr<Portfolio>(portfolio); }
-   inline void register_brokerage(const shared_ptr<Brokerage>& brokerage) { m_brokerage = weak_ptr<Brokerage>(brokerage); }
+    void sell(const boost::posix_time::ptime &time_point, Symbol symbol, double price, double percentage);
+
+    void process_job_node_sync(const shared_ptr<TradeJobNode> &job_node);
+
+    void push_job_node(const shared_ptr<TradeJobNode> &job_node) { _jobqueue.push(job_node); }
+
+    void run();
+
+    bool can_buy();
+
+    bool can_sell(Symbol symbol);
 
 private:
-   weak_ptr<Portfolio> m_portfolio;
-   weak_ptr<Brokerage> m_brokerage;
-   BlockingQueue<shared_ptr<TradeJobNode> > m_jobqueue;
-   boost::mutex m_cycle_mutex;
-   Mode m_mode;
-   void do_job();
+    shared_ptr<Portfolio> _portfolio;
+    shared_ptr<Brokerage> _brokerage;
+    BlockingQueue<shared_ptr<TradeJobNode> > _jobqueue;
+    Mode _mode;
+
+    void do_job();
 };
 
 #endif

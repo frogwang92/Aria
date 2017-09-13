@@ -10,14 +10,17 @@
 #include <quickfix/Values.h>
 #include <quickfix/Mutex.h>
 #include <quickfix/fix44/MarketDataRequest.h>
-
+#include "global.h"
 #include "FIXConfig/OKCoin.hpp"
 
 class FIXClient : public FIX::Application,
                   public FIX::MessageCracker {
 public:
+    FIXClient();
     void run();
-
+    void register_price_update_call_back(std::function<void(time_point time, price_type price, double vol)> price_update) {
+        _price_update_call_back = price_update;
+    }
 private:
     void onCreate(const FIX::SessionID &);
 
@@ -56,6 +59,9 @@ private:
     void onMessage(const FIX44::MarketDataSnapshotFullRefresh& message, const FIX::SessionID &sessionID);
     void onMessage(const FIX44::MarketDataIncrementalRefresh& message, const FIX::SessionID &sessionID);
 
+    std::function<void(time_point, price_type, double)> _price_update_call_back;
+
+    bool _haveSnapShot;
 };
 
 #endif //ARIA_FIXCLIENT_H

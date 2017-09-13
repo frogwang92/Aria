@@ -1,7 +1,5 @@
 
 #include "Portfolio.h"
-#include "../Data/DataSlice.h"
-#include "../Data/OHLCV.h"
 
 Portfolio::Portfolio(double init_cash)
    :m_cash(init_cash),
@@ -79,21 +77,5 @@ double Portfolio::get_hold_share_total(Symbol symbol)
    {
       result += iter2->second;
    }
-   return result;
-}
-
-double Portfolio::query_net_value(const shared_ptr<DataSlice>& p_data)
-{
-   double result(0);
-   for(std::map<Symbol, double>::iterator iter = m_holds.begin(); iter != m_holds.end(); ++iter)
-   {
-      shared_ptr<OHLCV> p_ohlcv = p_data->get_data(iter->first);
-      if(p_ohlcv)
-      {
-         result += get_hold_share_total(iter->first) * p_ohlcv->adj_close();
-      }
-   }
-   result += get_cash_total();
-
    return result;
 }

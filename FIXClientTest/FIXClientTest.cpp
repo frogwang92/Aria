@@ -1,5 +1,5 @@
 #include "global.h"
-#include "../FIXClient/FIXClient.h"
+#include "../FIXClient/FIXClientHandler.h"
 #include "quickfix/FileStore.h"
 #include "quickfix/SocketInitiator.h"
 #include "quickfix/SessionSettings.h"
@@ -14,18 +14,20 @@ int main(){
 
     try
     {
-        FIX::SessionSettings settings( file );
+//        FIX::SessionSettings settings( file );
+//
+//        FIXClient client;
+//        FIX::FileStoreFactory storeFactory( settings );
+//        FIX::ScreenLogFactory logFactory( settings );
+//        FIX::SocketInitiator initiator( client, storeFactory, settings);
 
-        FIXClient client;
-        FIX::FileStoreFactory storeFactory( settings );
-        FIX::ScreenLogFactory logFactory( settings );
-        FIX::SocketInitiator initiator( client, storeFactory, settings);
-
-        initiator.start();
-        client.run();
+//        initiator.start();
+//        client.run();
+//        sleep(300);
+//        initiator.stop();
+        FIXClientHandler handler(file);
+        handler.run();
         sleep(300);
-        initiator.stop();
-
         return 0;
     }
     catch ( std::exception & e )

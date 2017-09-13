@@ -2,9 +2,7 @@ INCLUDE_DIRECTORIES(${COMMON})
 INCLUDE_DIRECTORIES(${PYTHON27})
 
 SET(ENGINE_SRC
-        Engine.h Engine.cpp
-        BacktestTimeHandler.cpp BacktestTimeHandler.h
-        Scheduler.cpp Scheduler.h
+        RealTimeEngine.cpp RealTimeEngine.h
         )
 
 ADD_LIBRARY(Engine SHARED ${ENGINE_SRC})
