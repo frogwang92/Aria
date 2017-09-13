@@ -2,29 +2,29 @@
 //
 
 #include "stdafx.h"
+
 #ifdef WIN32
 #include <Windows.h>
 #endif
+
 #include "Singleton.h"
+
 #define INIT_LOG
+
 #include "logger.h"
 #include "logger_init.h"
-#include <boost/date_time.hpp>
-#include "../Engine/Engine.h"
-#include "../Data/Resolution.h"
+#include "../Engine/RealTimeEngine.h"
 
 using namespace boost;
 
-int main(int argc, char* argv[])
-{
-   init_log();
-   posix_time::ptime start(boost::gregorian::date(2005, 02, 01));
+int main(int argc, char *argv[]) {
+    init_log();
+    RealTimeEngine engine;
 
-   Singleton<Engine>::instance().init_back_test(start, Day);
-   Singleton<Engine>::instance().run();
-   
-   logging::core::get()->remove_all_sinks();
-   return 0;
+    engine.run();
+
+    logging::core::get()->remove_all_sinks();
+    return 0;
 }
 
 #undef INIT_LOG

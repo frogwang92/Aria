@@ -25,7 +25,6 @@ public:
    double get_hold_share_in_freezing(Symbol symbol);
    double get_cash_total();
    double get_hold_share_total(Symbol symbol);
-   double query_net_value(const shared_ptr<DataSlice>& p_data);
 
 private:
    double m_cash;
